@@ -6,7 +6,7 @@ function ProductoCard({ producto, alAgregar }) {
     const [agregado, setAgregado] = useState(false);
 
     function manejarClick() {
-        alAgregar(producto);
+        if (alAgregar) alAgregar(producto);
         setAgregado(true);
         setTimeout(() => setAgregado(false), 1200);
     }
@@ -15,16 +15,16 @@ function ProductoCard({ producto, alAgregar }) {
         <Card className={producto.categoria}>
             <Card.Body>
                 <Card.Title>
-                    <Link to ={'/producto/${producto.codigo}'} className="producto-link">
+                    <Link to={`/producto/${producto.codigo}`} className="producto-link">
                     {producto.nombre}
                     </Link>
                 </Card.Title>
                 <Card.Text>{producto.descripcion}</Card.Text>
-                <p className="precio">{producto.precio}</p>
+                <p className="precio">${producto.precio.toLocaleString("es-CL")}</p>
                 <Button
                     variant="outline-success"
-                    onClick="{manejar.Click}"
-                    disable="{agregado}"
+                    onClick={manejarClick}
+                    disabled={agregado}
                 >
                     {agregado ? "Agregado" : "Agregar"}
                 </Button>
