@@ -7,7 +7,7 @@ function ProductoCard({ producto, alAgregar }) {
 
     function manejarClick() {
         alAgregar(producto);
-        setAgregador(true);
+        setAgregado(true);
         setTimeout(() => setAgregado(false), 1200);
     }
 
@@ -34,4 +34,4 @@ function ProductoCard({ producto, alAgregar }) {
 
 }
 
-export default ProductCard;
+export default ProductoCard;
