@@ -7,7 +7,7 @@ function Header() {
                 <button className="menu-toggle" aria-label="Abrir menú">☰</button>
                 <nav className="main-nav">
                     <div className="logo">
-                        <img src="public/logo.jpg" alt="Logo Veterinaria San Marcos" />
+                        <img src="/logo.jpg" alt="Logo Veterinaria San Marcos" />
                         <span>Veterinaria San Marcos</span>
                     </div>
                     <ul>
