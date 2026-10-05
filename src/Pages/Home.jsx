@@ -75,7 +75,7 @@ function Home() {
                 </div>
             </section>
 
-            {/* POR QUÉ ELEGIRNOS */}
+          
             <section className="py-5">
                 <div className="container">
                     <h2 className="section-title text-center mx-auto" style={{ maxWidth: 500 }}>
@@ -133,9 +133,7 @@ function Home() {
                 </div>
             </section>
 
-            {/* sección de productos pendiente */}
-
-            {/* CONTACTO */}
+            
             <section className="py-5">
                 <div className="container">
                     <h2 className="section-title text-center mx-auto" style={{ maxWidth: 500 }}>

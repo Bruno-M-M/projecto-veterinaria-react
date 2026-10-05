@@ -22,7 +22,7 @@ function Footer() {
                             <li><NavLink to="/servicios">Servicios</NavLink></li>
                             <li><NavLink to="/nosotros">Nosotros</NavLink></li>
                             <li><NavLink to="/blogs">Blogs</NavLink></li>
-                            <li><NavLink to="/contacto">Contacto</NavLink></li>
+                            <li><NavLink to="/contprojecto-veterinaria-react-benja-decora\src\Pages\contacto.jsxacto">Contacto</NavLink></li>
                         </ul>
                     </div>
                     <div className="col-lg-3 col-6">
