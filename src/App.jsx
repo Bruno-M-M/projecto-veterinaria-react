@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Components/Layout.jsx";
 import Home from "./Pages/Home.jsx";
 import Productos from "./Pages/Productos.jsx";
+import DetalleProducto from "./Pages/DetalleProducto.jsx";
 import Pendiente from "./Pages/Pendiente.jsx";
 
 const paginas = [
@@ -21,6 +22,7 @@ function App() {
                 <Route element={<Layout />}>
                     <Route index element={<Home />} />
                     <Route path="productos" element={<Productos />} />
+                    <Route path="producto/:codigo" element={<DetalleProducto />} />
                     {paginas.map(([ruta, titulo]) => (
                         <Route key={ruta} path={ruta} element={<Pendiente titulo={titulo} />} />
                     ))}
