@@ -20,6 +20,7 @@ function Header() {
                         <li><NavLink to="/carrito">Carrito</NavLink></li>
                         <li><NavLink to="/login">Iniciar sesión</NavLink></li>
                         <li><NavLink to="/registro">Registrarse</NavLink></li>
+                        <li><NavLink to="/usuarios">Usuarios</NavLink></li>
                     </ul>
                 </nav>
             </div>

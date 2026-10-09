@@ -4,6 +4,7 @@ import Home from "./Pages/Home.jsx";
 import Pendiente from "./Pages/Pendiente.jsx";
 import Login from "./Pages/Login.jsx";
 import Registro from "./Pages/Registro.jsx";
+import Usuarios from "./Pages/Admin/Usuarios.jsx";
 
 const paginas = [
     ["productos", "Productos"],
@@ -24,6 +25,7 @@ function App() {
                     <Route index element={<Home />} />
                     <Route path="login" element={<Login />} />
                     <Route path="registro" element={<Registro />} />
+                    <Route path="usuarios" element={<Usuarios />} />
                     {paginas.map(([ruta, titulo]) => (
                         <Route key={ruta} path={ruta} element={<Pendiente titulo={titulo} />} />
                     ))}
