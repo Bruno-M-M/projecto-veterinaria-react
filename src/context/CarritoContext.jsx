@@ -5,8 +5,7 @@ const CLAVE_STORAGE = "carrito";
 const CarritoContext = createContext(null);
 
 export function CarritoProvider({ children }) {
-    // Se lee localStorage en el inicializador de useState (no en un useEffect aparte):
-    // con dos efectos, el de guardado pisaba lo guardado con [] antes de terminar la carga.
+
     const [carrito, setCarrito] = useState(() => {
         const guardado = localStorage.getItem(CLAVE_STORAGE);
         return guardado ? JSON.parse(guardado) : [];
@@ -33,8 +32,42 @@ export function CarritoProvider({ children }) {
         });
     }
 
+    function cambiarCantidad(codigo, delta) {
+        setCarrito((actual) =>
+            actual
+                .map((item) =>
+                    item.producto === codigo
+                        ? { ...item, cantidad: item.cantidad + delta }
+                        : item
+                )
+                .filter((item) => item.cantidad > 0)
+        );
+    }
+
+    function quitarDelCarrito(codigo) {
+        setCarrito((actual) => actual.filter((item) => item.producto !== codigo));
+    }
+
+    function vaciarCarrito() {
+        setCarrito([]);
+    }
+
+    
+    const total = carrito.reduce((suma, item) => suma + item.precio * item.cantidad, 0);
+    const cantidadTotal = carrito.reduce((suma, item) => suma + item.cantidad, 0);
+
     return (
-        <CarritoContext.Provider value={{ carrito, agregarAlCarrito }}>
+        <CarritoContext.Provider
+            value={{
+                carrito,
+                agregarAlCarrito,
+                cambiarCantidad,
+                quitarDelCarrito,
+                vaciarCarrito,
+                total,
+                cantidadTotal,
+            }}
+        >
             {children}
         </CarritoContext.Provider>
     );
