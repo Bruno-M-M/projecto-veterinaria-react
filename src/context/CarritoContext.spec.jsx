@@ -36,7 +36,7 @@ describe("CarritoContext", () => {
         expect(ver("total")).toBe("4200");
     });
 
-    it("agregar dos veces el mismo producto suma la cantidad en una sola linea", () => {
+    it("agregar dos veces el mismo producto suma la cantidad en una sola línea", () => {
         montar();
         clic("agregar");
         clic("agregar");
