@@ -17,17 +17,17 @@ export default function Login() {
 
         const emailLimpio = email.trim().toLowerCase();
 
-        // 1. Caso Administrador
+        
         if (emailLimpio === ADMIN_EMAIL && password === CLAVE_COMUN) {
             localStorage.setItem("esAdmin", "true");
             localStorage.setItem("usuario", JSON.stringify({ email: emailLimpio, rol: "admin" }));
             
-            // Navegación fluida por React Router
+            
             navigate("/admin");
             return;
         }
 
-        // 2. Caso Usuario Normal
+        
         if (emailLimpio === USER_EMAIL && password === CLAVE_COMUN) {
             localStorage.setItem("esAdmin", "false");
             localStorage.setItem("usuario", JSON.stringify({ email: emailLimpio, rol: "usuario" }));
