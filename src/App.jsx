@@ -7,6 +7,7 @@ import Carrito from "./pages/Carrito.jsx";
 import Pendiente from "./pages/Pendiente.jsx";
 import AdminProductos from "./pages/admin/AdminProductos.jsx";
 import NuevoProducto from "./pages/admin/NuevoProducto.jsx";
+import NoEncontrado from "./pages/NoEncontrado.jsx";
 
 const paginas = [
     ["servicios", "Servicios"],
@@ -15,6 +16,7 @@ const paginas = [
     ["contacto", "Contacto"],
     ["login", "Iniciar sesión"],
     ["registro", "Registrarse"],
+    ["checkout", "Checkout"],
 ];
 
 function App() {
@@ -31,6 +33,7 @@ function App() {
                     {paginas.map(([ruta, titulo]) => (
                         <Route key={ruta} path={ruta} element={<Pendiente titulo={titulo} />} />
                     ))}
+                    <Route path="*" element={<NoEncontrado />} />
                 </Route>
             </Routes>
         </BrowserRouter>
