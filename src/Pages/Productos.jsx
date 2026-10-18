@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ProductosPorDefecto } from "../data/productosPorDefecto.js";
-import ProductoCard from "../Components/ProductoCard.jsx";
+import ProductoCard from "../components/ProductoCard.jsx";
 import { useCarrito } from "../context/CarritoContext.jsx";
 
 
