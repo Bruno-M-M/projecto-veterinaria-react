@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { ProductosPorDefecto } from "../data/productosPorDefecto.js";
 import ProductoCard from "../components/ProductoCard.jsx";
 import { useCarrito } from "../context/CarritoContext.jsx";
+import { useProductos } from "../context/ProductosContext.jsx";
 
 
 const CATEGORIAS = [
@@ -20,11 +20,12 @@ const CATEGORIAS = [
 function Productos() {
     const [categoria, setCategoria] = useState("todas");
     const { agregarAlCarrito } = useCarrito();
+    const { productos } = useProductos();
 
-    const productosAMostrar = 
+    const productosAMostrar =
         categoria === "todas"
-        ? ProductosPorDefecto
-        : ProductosPorDefecto.filter((p) => p.categoria === categoria);
+        ? productos
+        : productos.filter((p) => p.categoria === categoria);
 
     return (
         <section id="productos">

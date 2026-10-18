@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import { ProductosPorDefecto } from "../data/productosPorDefecto.js";
 import { nombreCategoria } from "../data/categorias.js";
 import { useCarrito } from "../context/CarritoContext.jsx";
+import { useProductos } from "../context/ProductosContext.jsx";
 
 function ContenidoDetalle({ producto }) {
     const { agregarAlCarrito } = useCarrito();
+    const { productos } = useProductos();
     const [cantidad, setCantidad] = useState(1);
     const [agregado, setAgregado] = useState(false);
 
@@ -17,7 +18,7 @@ function ContenidoDetalle({ producto }) {
         };
     }, [producto.nombre]);
 
-    const recomendados = ProductosPorDefecto
+    const recomendados = productos
         .filter((p) => p.categoria === producto.categoria && p.codigo !== producto.codigo)
         .slice(0, 3);
 
@@ -89,7 +90,8 @@ function ContenidoDetalle({ producto }) {
 
 function DetalleProducto() {
     const { codigo } = useParams();
-    const producto = ProductosPorDefecto.find((p) => p.codigo === codigo);
+    const { productos } = useProductos();
+    const producto = productos.find((p) => p.codigo === codigo);
 
     return (
         <section id="detalle-producto">
