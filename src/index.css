@@ -206,6 +206,21 @@ a:hover {
   font-weight: 600;
 }
 
+.main-nav ul li a.nav-registro {
+  display: inline-block;
+  background-color: var(--color-accent);
+  color: var(--color-dark);
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  transition: var(--transition-base);
+}
+
+.main-nav ul li a.nav-registro:hover,
+.main-nav ul li a.nav-registro:focus-visible {
+  background-color: var(--color-accent-dark);
+  color: var(--color-white);
+}
+
 .user-actions {
   display: flex;
   align-items: center;
