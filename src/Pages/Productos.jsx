@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ProductosPorDefecto } from "../data/productosPorDefecto.js";
 import ProductoCard from "../Components/ProductoCard.jsx";
+import { useCarrito } from "../context/CarritoContext.jsx";
 
 
 const CATEGORIAS = [
@@ -18,6 +19,7 @@ const CATEGORIAS = [
 
 function Productos() {
     const [categoria, setCategoria] = useState("todas");
+    const { agregarAlCarrito } = useCarrito();
 
     const productosAMostrar = 
         categoria === "todas"
@@ -44,7 +46,8 @@ function Productos() {
 
             <div className="servicios">
                 {productosAMostrar.map((producto) => (
-                    <ProductoCard key={producto.codigo} producto={producto}/>
+                    <ProductoCard key={producto.codigo} producto={producto}
+                    alAgregar={agregarAlCarrito}/>
                 ))}
             </div>
         </section>
