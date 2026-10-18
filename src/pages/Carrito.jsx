@@ -4,7 +4,7 @@ import { useCarrito } from "../context/CarritoContext.jsx";
 import { formatoPrecio } from "../utils/productos.js";
 
 function Carrito() {
-    const { carrito, cambiarCantidad, quitarDelCarrito, vaciarCarrito, total } = useCarrito();
+    const { carrito, cambiarCantidad, quitarDelCarrito, vaciarCarrito, total, cantidadTotal } = useCarrito();
     const navigate = useNavigate();
 
     if (carrito.length === 0) {
@@ -70,7 +70,10 @@ function Carrito() {
 
             <div className="d-flex flex-wrap justify-content-between align-items-center gap-3">
                 <Button variant="outline-secondary" onClick={vaciarCarrito}>Limpiar carrito</Button>
-                <h2 className="h4 mb-0" data-testid="total-carrito">Total: {formatoPrecio(total)}</h2>
+                <div className="text-center">
+                    <p className="mb-0 text-muted" data-testid="cantidad-carrito">Cantidad de productos: {cantidadTotal}</p>
+                    <h2 className="h4 mb-0" data-testid="total-carrito">Total: {formatoPrecio(total)}</h2>
+                </div>
                 <Button variant="success" onClick={() => navigate("/checkout")}>Comprar ahora</Button>
             </div>
         </Container>
