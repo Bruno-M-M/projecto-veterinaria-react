@@ -11,9 +11,6 @@ function esEnteroNoNegativo(texto) {
     return Number.isInteger(numero) && numero >= 0;
 }
 
-// Recibe los valores tal como salen del formulario (texto) y la lista de productos
-// que ya existen. Devuelve un objeto { campo: "mensaje" } solo con los campos
-// que tienen error; si no hay errores, devuelve {}.
 export function validarProducto(datos, productosExistentes = []) {
     const errores = {};
 

@@ -12,7 +12,6 @@ const VALIDO = {
 
 const EXISTENTES = [{ codigo: "ME001" }, { codigo: "ME002" }];
 
-// Parte de un producto válido y cambia solo los campos indicados
 const con = (cambios) => ({ ...VALIDO, ...cambios });
 
 describe("validarProducto", () => {
