@@ -6,6 +6,7 @@ import DetalleProducto from "./pages/DetalleProducto.jsx";
 import Carrito from "./pages/Carrito.jsx";
 import Pendiente from "./pages/Pendiente.jsx";
 import AdminProductos from "./pages/admin/AdminProductos.jsx";
+import NuevoProducto from "./pages/admin/NuevoProducto.jsx";
 
 const paginas = [
     ["servicios", "Servicios"],
@@ -26,7 +27,7 @@ function App() {
                     <Route path="producto/:codigo" element={<DetalleProducto />} />
                     <Route path="carrito" element={<Carrito />} />
                     <Route path="admin/productos" element={<AdminProductos />} />
-                    <Route path="admin/productos/nuevo" element={<Pendiente titulo="Nuevo producto" />} />
+                    <Route path="admin/productos/nuevo" element={<NuevoProducto />} />
                     {paginas.map(([ruta, titulo]) => (
                         <Route key={ruta} path={ruta} element={<Pendiente titulo={titulo} />} />
                     ))}
