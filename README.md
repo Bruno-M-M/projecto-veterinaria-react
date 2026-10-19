@@ -12,24 +12,25 @@ Migración del sitio web de la **Veterinaria San Marcos** (originalmente HTML, C
 | React Router DOM 7 | Rutas (`Routes`, `Route`, `Outlet`, `NavLink`, `useParams`, `useNavigate`) |
 | React Bootstrap 2 / Bootstrap 5 | Componentes y estilos responsivos |
 | Context API | Estado compartido (carrito y productos) |
-| Karma + Jasmine + Testing Library | Pruebas unitarias y de componentes |
-| karma-coverage (Istanbul) | Informe de cobertura |
+| Vitest + Testing Library + user-event | Pruebas unitarias y de componentes (entorno simulado con jsdom) |
+| @vitest/coverage-v8 | Informe de cobertura |
 | Oxlint | Análisis estático del código |
 
 ## Cómo ejecutarlo
 
-Requisitos: **Node.js 20.19 o superior** (o 22.12 o superior) y **Google Chrome** instalado (las pruebas usan Chrome en modo headless).
+Requisitos: **Node.js 20.19 o superior** (o 22.12 o superior).
 
 ```bash
 npm install        # instala las dependencias
 npm run dev        # servidor de desarrollo en http://localhost:5173
 npm run build      # versión de producción en /dist
 npm run lint       # análisis del código
-npm test           # pruebas + cobertura (una sola ejecución)
-npm run test:watch # pruebas que se repiten al guardar
+npm test           # pruebas en modo observador (se repiten al guardar)
+npm run test:run   # pruebas, una sola ejecución
+npm run test:coverage # pruebas + informe de cobertura
 ```
 
-Al terminar `npm test`, el informe de cobertura en HTML queda en `coverage/index.html`. El umbral mínimo configurado es **90 %** en sentencias, ramas, funciones y líneas: si baja de ahí, el comando falla.
+Al terminar `npm run test:coverage`, el informe en HTML queda en `coverage/index.html`. El umbral mínimo configurado (en `vite.config.js`) es **90 %** en sentencias, ramas, funciones y líneas: si baja de ahí, el comando falla.
 
 ## Estructura del proyecto
 
@@ -43,10 +44,11 @@ src/
 ├── utils/          Funciones puras: formatoPrecio, esStockCritico, validarProducto
 ├── App.jsx         Tabla de rutas
 ├── main.jsx        Punto de entrada (monta los Providers)
+├── setupTests.js   Configuración común de las pruebas (jest-dom)
 └── index.css       Estilos globales
 ```
 
-Cada archivo de prueba (`*.spec.js` / `*.spec.jsx`) está junto al código que prueba.
+Cada archivo de prueba (`*.test.js` / `*.test.jsx`) está junto al código que prueba.
 
 ## Rutas
 
@@ -82,14 +84,14 @@ Para volver a los datos originales, ejecuta en la consola del navegador `localSt
 
 ## Pruebas
 
-`npm test` ejecuta todas las pruebas con Karma y Jasmine. Se prueban:
+`npm run test:run` ejecuta todas las pruebas con Vitest (React Testing Library para renderizar y `user-event` para simular clics y escritura). Se prueban:
 
 - **Contextos:** carrito y productos (agregar, quitar, persistencia, uso fuera del Provider).
 - **Validaciones:** `validarProducto` (código repetido, límites de largo, números, categoría).
 - **Funciones puras:** `formatoPrecio`, `esStockCritico`, `nombreCategoria`.
 - **Componentes:** página del carrito, administración de productos, formulario de nuevo producto y página 404.
 
-Se usan *mocks* (`spyOn`) para `localStorage` y `window.confirm`.
+Se usan *mocks* (`vi.spyOn`) para `localStorage`, `console.error` y `window.confirm`, y `MemoryRouter` para probar componentes que usan rutas.
 
 ## Convenciones del equipo
 

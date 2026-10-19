@@ -1,3 +1,4 @@
+import { describe, test, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import NoEncontrado from "./NoEncontrado.jsx";
@@ -15,20 +16,20 @@ function montar(ruta) {
 }
 
 describe("NoEncontrado", () => {
-    it("una ruta que no existe muestra el mensaje 404", () => {
+    test("una ruta que no existe muestra el mensaje 404", () => {
         montar("/ruta-inventada");
-        expect(screen.getByText("404")).toBeTruthy();
-        expect(screen.getByText("No encontramos la página que buscas.")).toBeTruthy();
+        expect(screen.getByText("404")).toBeInTheDocument();
+        expect(screen.getByText("No encontramos la página que buscas.")).toBeInTheDocument();
     });
 
-    it("el botón Volver al inicio apunta a la página principal", () => {
+    test("el botón Volver al inicio apunta a la página principal", () => {
         montar("/ruta-inventada");
-        expect(screen.getByText("Volver al inicio").getAttribute("href")).toBe("/");
+        expect(screen.getByText("Volver al inicio")).toHaveAttribute("href", "/");
     });
 
-    it("una ruta que sí existe no muestra el 404", () => {
+    test("una ruta que sí existe no muestra el 404", () => {
         montar("/");
-        expect(screen.getByText("Página de inicio")).toBeTruthy();
-        expect(screen.queryByText("404")).toBeNull();
+        expect(screen.getByText("Página de inicio")).toBeInTheDocument();
+        expect(screen.queryByText("404")).not.toBeInTheDocument();
     });
 });

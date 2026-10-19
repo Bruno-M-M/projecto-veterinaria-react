@@ -1,4 +1,6 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { describe, test, expect, beforeEach, vi } from "vitest";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { ProductosProvider, useProductos } from "./ProductosContext.jsx";
 import { ProductosPorDefecto } from "../data/productosPorDefecto.js";
 
@@ -21,54 +23,52 @@ function Sonda() {
 
 const montar = () => render(<ProductosProvider><Sonda /></ProductosProvider>);
 const ver = (id) => screen.getByTestId(id).textContent;
-const clic = (texto) => fireEvent.click(screen.getByText(texto));
+const clic = (texto) => userEvent.click(screen.getByText(texto));
 
 describe("ProductosContext", () => {
     beforeEach(() => localStorage.clear());
 
-    it("sin datos guardados parte con los productos por defecto", () => {
+    test("sin datos guardados parte con los productos por defecto", () => {
         montar();
         expect(ver("cantidad")).toBe(String(ProductosPorDefecto.length));
     });
 
-    it("agregarProducto suma el producto a la lista", () => {
+    test("agregarProducto suma el producto a la lista", async () => {
         montar();
-        clic("agregar");
+        await clic("agregar");
         expect(ver("cantidad")).toBe(String(ProductosPorDefecto.length + 1));
         expect(ver("hay-nuevo")).toBe("true");
     });
 
-    it("eliminarProducto quita solo el producto con ese código", () => {
+    test("eliminarProducto quita solo el producto con ese código", async () => {
         montar();
-        clic("eliminar ME001");
+        await clic("eliminar ME001");
         expect(ver("hay-me001")).toBe("false");
         expect(ver("cantidad")).toBe(String(ProductosPorDefecto.length - 1));
     });
 
-    it("eliminar un código que no existe no cambia la lista", () => {
+    test("eliminar un código que no existe no cambia la lista", async () => {
         montar();
-        clic("eliminar inexistente");
+        await clic("eliminar inexistente");
         expect(ver("cantidad")).toBe(String(ProductosPorDefecto.length));
     });
 
-    it("al iniciar recupera la lista guardada en localStorage", () => {
+    test("al iniciar recupera la lista guardada en localStorage", () => {
         localStorage.setItem("productosGuardados", JSON.stringify([NUEVO]));
         montar();
         expect(ver("cantidad")).toBe("1");
         expect(ver("hay-nuevo")).toBe("true");
     });
 
-    it("guarda la lista en localStorage cada vez que cambia", () => {
-        const espia = spyOn(Storage.prototype, "setItem").and.callThrough();
+    test("guarda la lista en localStorage cada vez que cambia", async () => {
+        const espia = vi.spyOn(Storage.prototype, "setItem");
         montar();
-        clic("agregar");
-        expect(espia).toHaveBeenCalledWith("productosGuardados", jasmine.stringMatching("ZZ999"));
+        await clic("agregar");
+        expect(espia).toHaveBeenCalledWith("productosGuardados", expect.stringMatching("ZZ999"));
     });
 
-    it("useProductos fuera del ProductosProvider lanza un error claro", async () => {
-        spyOn(console, "error");
-        await jasmine.spyOnGlobalErrorsAsync(async () => {
-            expect(() => render(<Sonda />)).toThrowError(/ProductosProvider/);
-        });
+    test("useProductos fuera del ProductosProvider lanza un error claro", () => {
+        vi.spyOn(console, "error").mockImplementation(() => {});
+        expect(() => render(<Sonda />)).toThrowError(/ProductosProvider/);
     });
 });
