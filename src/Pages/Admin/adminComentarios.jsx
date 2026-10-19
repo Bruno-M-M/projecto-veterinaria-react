@@ -1,7 +1,27 @@
-import useComentarios from "../../hooks/useComentarios.js";
+import { useState, useEffect } from "react";
+
+const CLAVE_STORAGE = "comentarios_san_marcos";
 
 function AdminComentarios() {
-    const { comentarios, eliminarComentario } = useComentarios();
+    const [comentarios, setComentarios] = useState(() => {
+        try {
+            const guardados = localStorage.getItem(CLAVE_STORAGE);
+            return guardados ? JSON.parse(guardados) : [];
+        } catch {
+            return [];
+        }
+    });
+
+    useEffect(() => {
+        try {
+            localStorage.setItem(CLAVE_STORAGE, JSON.stringify(comentarios));
+        } catch {
+        }
+    }, [comentarios]);
+
+    const eliminarComentario = (id) => {
+        setComentarios((prev) => prev.filter((c) => c.id !== id));
+    };
 
     return (
         <>
