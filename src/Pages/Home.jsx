@@ -15,12 +15,11 @@ function Home() {
         }
     });
 
-    // Cada vez que cambian, se guardan en el navegador.
+    
     useEffect(() => {
         try {
             localStorage.setItem(CLAVE_STORAGE, JSON.stringify(comentarios));
         } catch {
-            // si localStorage no está disponible, simplemente no se guarda
         }
     }, [comentarios]);
 
@@ -30,7 +29,6 @@ function Home() {
             fecha: new Date().toLocaleDateString("es-CL"),
             ...datos,
         };
-        // el más nuevo primero
         setComentarios((prev) => [nuevo, ...prev]);
     };
 
