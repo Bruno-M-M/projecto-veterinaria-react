@@ -902,3 +902,32 @@ a:hover {
     text-align: center;
   }
 }
+.admin-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.admin-sidebar {
+  display: none;
+}
+
+.admin-sidebar.abierto {
+  display: block;
+}
+
+.admin-content {
+  flex: 1 1 auto;
+  min-width: 0; 
+}
+
+.admin-content .container {
+  max-width: 100%;
+}
+
+@media (min-width: 992px) {
+  .admin-layout {
+    flex-direction: row;
+  }
+
+
