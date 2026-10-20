@@ -930,4 +930,9 @@ a:hover {
     flex-direction: row;
   }
 
-
+  .admin-sidebar {
+    display: block;
+    flex: 0 0 240px;
+    width: 240px;
+  }
+}
