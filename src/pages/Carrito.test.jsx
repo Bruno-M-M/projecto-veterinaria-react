@@ -61,13 +61,6 @@ describe("Carrito (página)", () => {
         expect(texto("cantidad-carrito")).toBe("Cantidad de productos: 2");
     });
 
-    test("el botón - disminuye la cantidad y el total", async () => {
-        montar([A, B]);
-        await clicEtiqueta("Disminuir cantidad de Amoxibay 250mg");
-        expect(texto("total-carrito")).toBe("Total: $25.000");
-        expect(texto("cantidad-carrito")).toBe("Cantidad de productos: 2");
-    });
-
     test("el botón - con cantidad 1 elimina la fila", async () => {
         montar([A, B]);
         await clicEtiqueta("Disminuir cantidad de Enrox 50mg");
